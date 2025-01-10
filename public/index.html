@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encurtador de Links Rápido e Fácil - LinkFly</title>
+    <meta
+      name="description"
+      content="LinkFly: O encurtador de links rápido e fácil. Transforme URLs longas em links curtos ideais para redes sociais e compartilhamentos.
+      "
+    />
+    <meta name="robots" content="index, follow" />
+    <meta
+      property="og:title"
+      content="Use o LinkFly para transformar links longos em URLs curtas perfeitas para compartilhamentos. Simples, rápido e grátis!
+    "
+    />
+    <meta
+      property="og:description"
+      content="Use o LinkFly para transformar links longos em URLs curtas perfeitas para compartilhamentos. Simples, rápido e grátis!
+      "
+    />
+    <meta property="og:image" content="./images/logo-png.png" />
+    <meta name="twitter:card" content="./images/logo-png.png" />
+    <meta name="twitter:title" content="LinkFly - Encurtador de Link Rápido" />
+    <meta
+      name="twitter:description"
+      content="Encurte seus links de forma rápida e prática. Transforme URLs longas em links curtos e fáceis de compartilhar."
+    />
+    <meta name="twitter:image" content="./images/logo-png.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
+    <meta name="application-name" content="LinkFly" />
+    <meta http-equiv="Content-Language" content="pt-BR" />
+    <meta property="og:locale" content="pt_BR" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "LinkFly",
+        "description": "Encurte seus links de forma rápida e prática. Transforme URLs longas em links curtos e fáceis de compartilhar.",
+        "url": "https://linkfly.app.br",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "creator": {
+          "@type": "Person",
+          "name": "Matheus Soares"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="./images/logo-png.png"
+        alt="LinkFly - Encurtador de Links"
+        class="logo"
+      />
+
+      <h2>Encurte seus links rapidamente</h2>
+      <p class="description">
+        Cole o link no campo abaixo e obtenha uma URL curta em segundos.
+      </p>
+      <form id="shorten-form">
+        <input
+          type="url"
+          id="url-input"
+          placeholder="Cole seu link aqui"
+          required
+        />
+        <button type="submit">Encurtar</button>
+      </form>
+      <div id="shortened-link" class="hidden">
+        <p>
+          Link Encurtado:
+          <a href="#" id="shortened-url" target="_blank"></a>
+        </p>
+        <button
+          id="copy-btn"
+          aria-label="Copiar link encurtado para a área de transferência"
+        >
+          Copiar Link
+        </button>
+      </div>
+    </div>
+    <footer>
+      <p>© 2025 LinkFly. Todos os direitos reservados.</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

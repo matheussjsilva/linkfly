@@ -1,0 +1,105 @@
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e9f5ff;
+  margin: 0;
+}
+
+.container {
+  background: white;
+  padding: 40px 30px;
+
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #20daa9;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  padding: 12px 15px;
+  width: 100%;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #20daa9; /* Cor de foco para alinhar com a logo */
+  box-shadow: 0 0 8px rgba(32, 218, 169, 0.2); /* Sombra do foco em verde */
+}
+
+button {
+  padding: 12px 20px;
+  background-color: #20daa9; /* Cor de fundo do botão alinhada com a logo */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #17b590; /* Cor mais escura para o hover */
+  transform: scale(1.05);
+}
+
+#shortened-link {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: 200px;
+  margin-bottom: 0px;
+}
+img {
+  height: 190px;
+  margin-top: -30px;
+  margin-bottom: -30px;
+  padding: -30px;
+}
+
+@media (max-width: 375px) {
+  .container {
+    width: 300px;
+    padding: 30px 20px;
+  }
+
+  input,
+  button {
+    font-size: 14px;
+    padding: 10px 15px;
+    margin: 4px;
+  }
+
+  button {
+    margin-top: 8px;
+  }
+}
