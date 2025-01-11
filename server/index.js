@@ -36,7 +36,7 @@ app.get("/:shortCode", (req, res) => {
 
 app.get("/sitemap.xml", (req, res) => {
   console.log("Rota /sitemap.xml foi acessada");
-  res.sendFile(path.join(__dirname, "/sitemap.xml"));
+  res.sendFile(path.join(__dirname, "sitemap.xml"));
 });
 
 app.listen(port, () => {
