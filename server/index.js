@@ -17,7 +17,7 @@ app.post("/shorten", (req, res) => {
   const { url } = req.body;
   const shortCode = nanoid(6);
   const shortUrl = `${(
-    process.env.BASE_URL || "https://linkfly-production.up.railway.app"
+    process.env.BASE_URL || "https://www.linkfly.app.br"
   ).replace(/\/+$/, "")}/${shortCode}`;
 
   urlDatabase[shortCode] = url;
