@@ -36,7 +36,7 @@ app.get("/:shortCode", (req, res) => {
 
 app.get("/sitemap.xml", (req, res) => {
   console.log(path.join(process.cwd(), "server", "sitemap.xml"));
-  res.sendFile(path.join(process.cwd(), "server", "sitemap.xml"));
+  res.sendFile(path.join(__dirname, "sitemap.xml"));
 });
 
 app.listen(port, () => {
