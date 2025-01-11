@@ -8,13 +8,16 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const url = input.value;
-  const response = await fetch("/shorten", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ url }),
-  });
+  const response = await fetch(
+    "https://linkfly-production.up.railway.app/shorten",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url }),
+    }
+  );
   const data = await response.json();
   shortenedUrl.textContent = data.shortenedUrl;
   shortenedUrl.href = data.shortenedUrl;
