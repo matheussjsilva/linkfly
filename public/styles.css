@@ -44,13 +44,13 @@ input {
 
 input:focus {
   outline: none;
-  border-color: #20daa9; /* Cor de foco para alinhar com a logo */
-  box-shadow: 0 0 8px rgba(32, 218, 169, 0.2); /* Sombra do foco em verde */
+  border-color: #20daa9;
+  box-shadow: 0 0 8px rgba(32, 218, 169, 0.2);
 }
 
 button {
   padding: 12px 20px;
-  background-color: #20daa9; /* Cor de fundo do botão alinhada com a logo */
+  background-color: #20daa9;
   color: white;
   border: none;
   border-radius: 8px;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-  background-color: #17b590; /* Cor mais escura para o hover */
+  background-color: #17b590;
   transform: scale(1.05);
 }
 
