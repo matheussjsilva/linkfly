@@ -2,12 +2,14 @@ import express from "express";
 import { nanoid } from "nanoid";
 import path from "path";
 import dotenv from "dotenv";
+import compression from "compression";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(compression());
 app.use(express.static(path.join(process.cwd(), "public")));
 app.use(express.json());
 
