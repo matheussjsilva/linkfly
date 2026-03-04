@@ -1,0 +1,15 @@
+---
+name: Consulta Obrigatória
+description: Regra primária que obriga a leitura da documentação central do projeto.
+---
+# Regra de Consulta Obrigatória (.cursorrules)
+
+1. **LEITURA INICIAL OBRIGATÓRIA:**
+Antes de você (IA) sugerir qualquer alteração de código, refatoramento, criação de arquivo ou execução de comando no terminal neste projeto, você DEVE LER O CONTEÚDO DO ARQUIVO `consulta.md` localizado na raiz do projeto (`/consulta.md`).
+
+2. **COMPREENSÃO DO CONTEXTO:**
+Você deve basear todas as suas decisões arquiteturais, lógicas e visuais nas informações contidas em `consulta.md`. 
+O não cumprimento dessa regra resultará em quebra da arquitetura (MVC / DTO), vazamento de dados ou alteração indevida da experiência do usuário (UX/UI).
+
+3. **PRIORIDADE:**
+Se houver conflito entre o que o usuário pedir e o que está no `consulta.md`, você deve alertar o usuário sobre a divergência e perguntar se ele deseja alterar o documento central de consulta antes de prosseguir com a implementação.

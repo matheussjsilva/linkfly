@@ -1,0 +1,290 @@
+/* Migrated CSS Styles for LinkFly MVP */
+:root {
+  --primary-color: #20daa9;
+  --primary-hover: #17b590;
+  --bg-color: #e9f5ff;
+  --text-base: #333333;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 12px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-base);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.container {
+  background: white;
+  padding: 40px 30px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--primary-color);
+  position: relative;
+  z-index: 10;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  max-width: 100%;
+  height: 140px; /* Reduced slightly for better vertical rhythm */
+  object-fit: contain;
+  margin: -20px auto 10px auto;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  margin: 0 0 5px 0;
+  color: var(--text-base);
+}
+
+header h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #666;
+  margin: 0 0 15px 0;
+}
+
+.description {
+  font-size: 0.9rem;
+  margin-bottom: 25px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+input {
+  padding: 14px 15px 14px 45px;
+  width: 100%;
+  border: 2px solid #eee;
+  border-radius: var(--border-radius-sm);
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: var(--transition);
+  color: var(--text-base);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(32, 218, 169, 0.15);
+}
+
+input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+button {
+  padding: 14px 20px;
+  background-color: var(--primary-color);
+  color: var(--text-base);
+  border: none;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: var(--transition);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(23, 181, 144, 0.3);
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* Success State Styles */
+.success-container {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-box {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: var(--border-radius-sm);
+  border: 1px dashed #ccc;
+  word-break: break-all;
+}
+
+.result-box .label {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+#shortened-url {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary-hover);
+  text-decoration: none;
+}
+
+#shortened-url:hover {
+  text-decoration: underline;
+}
+
+#copy-btn.copied {
+  background-color: #333;
+  color: white;
+}
+
+/* Error State */
+.error-toast {
+  margin-top: 20px;
+  padding: 12px 15px;
+  background-color: #ffeef0;
+  color: #d93025;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border-left: 4px solid #d93025;
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .container {
+    border-color: transparent; /* Cleaner on small mobile */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  
+  .ad-leaderboard {
+    display: none; /* Leaderboards usually break mobile, use sticky instead */
+  }
+  
+  .ad-mobile-sticky {
+    display: flex;
+  }
+}
+
+/* Monetization / Ad Styles */
+.ad-container {
+  background-color: #f1f3f4;
+  border: 1px dashed #d1d5db;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  margin: 15px 0;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.ad-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  color: #c1c7d0;
+}
+
+.ad-placeholder {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ad-leaderboard {
+  width: 100%;
+  max-width: 728px;
+  height: 90px;
+  margin: 0 auto 30px auto;
+}
+
+.ad-rectangle {
+  width: 100%;
+  height: 250px;
+  margin-top: 25px;
+}
+
+.ad-mobile-sticky {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  z-index: 50;
+  margin: 0;
+  border-radius: 0;
+  border-top: 1px solid #eee;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
