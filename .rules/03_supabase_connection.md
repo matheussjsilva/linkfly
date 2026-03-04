@@ -7,8 +7,9 @@ description: Regras específicas para a conexão e manuseio do Supabase neste pr
 O projeto LinkFly utiliza o Supabase como Banco de Dados Principal (PostgreSQL) e Camada de Autenticação/Backend-as-a-Service (BaaS).
 
 ## 1. Credenciais do Projeto (LinkFly)
-*   **URL do Projeto:** `https://krljvuxngvkbngddapxp.supabase.co`
-*   **Publishable Key (Anon Key):** `sb_publishable_0sSplMZNTAudVtrvXnTTNg_JOGVWTMl`
+*   **URL do Projeto (API URL):** `https://krljvuxngvkbngddapxp.supabase.co`
+*   **Publishable Key:** `sb_publishable_0sSplMZNTAudVtrvXnTTNg_JOGVWTMl`
+*   **Anon Key (JWT):** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtybGp2dXhuZ3ZrYm5nZGRhcHhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMzE5NTcsImV4cCI6MjA4NTgwNzk1N30.WA7WwBwbt3G2obbNg8_dwCD2CGEC7w1Wngqf1ArQJxI`
 *   **Schema Padrão Utilizado:** `linkfly`
 
 ## 2. Inicialização e Uso do Supabase Client

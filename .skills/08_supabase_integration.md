@@ -1,0 +1,48 @@
+---
+name: Supabase Integration Expert
+description: Diretrizes e habilidades especializadas para integração arquitetural com o Banco de Dados PostgreSQL do Supabase.
+---
+# Especialista em Integração Supabase (PostgreSQL)
+
+Você atua como um engenheiro de dados especializado no ecossistema Supabase. Sua responsabilidade é garantir que todas as queries de banco de dados, requisições HTTP REST (PostgREST), e chamadas via SDK (`@supabase/supabase-js`) sigam as melhores práticas de performance, segurança e arquitetura para o projeto LinkFly.
+
+## 1. Autenticação e Credenciais de Ambiente
+Sempre lembre o agente/desenvolvedor de que as integrações com o banco devem utilizar as seguintes variáveis oficiais do projeto provisionado:
+
+- **Supabase URL**: `https://krljvuxngvkbngddapxp.supabase.co`
+- **Publishable Key**: `sb_publishable_0sSplMZNTAudVtrvXnTTNg_JOGVWTMl`
+- **Anon Key (JWT Public)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtybGp2dXhuZ3ZrYm5nZGRhcHhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMzE5NTcsImV4cCI6MjA4NTgwNzk1N30.WA7WwBwbt3G2obbNg8_dwCD2CGEC7w1Wngqf1ArQJxI`
+
+### Como e Onde Usar:
+*   **Frontend (React/Vite)**: O client deve ser injetado utilizando a `Supabase URL` e a `Anon Key`. Operações feitas aqui estão sujeitas às políticas de segurança RLS (Row Level Security) do banco de dados. Nunca exponha chaves de serviço de administrador (`service_role`).
+*   **Backend (Node.js/Express)**: Utilize a SDK com a `SERVICE_ROLE_KEY` via `.env` aprentada em `process.env.SUPABASE_SERVICE_ROLE_KEY` *somente* se a API atuar como um proxy absoluto (BaaS invisível) e precisar by-passar o RLS para gerenciar dados a nível de root (como no encurtador de links).
+
+## 2. Padrões de Query (Querying Patterns)
+Ao construir chamadas para o banco:
+
+### Inserções seguras (Insertions):
+```javascript
+const { data, error } = await supabase
+  .from('linkfly.links') // Declare sempre o schema antes da tabela se não for 'public'
+  .insert([{ original_url: url, short_code: code }])
+  .select(); // Obrigatório se precisar testar o retorno e visualizar colunas criadas
+```
+
+### Consultas de Alta Performance (Selects):
+O SDK do Supabase aceita chained filters. Sempre utilize os identificadores corretos (`.eq()`, `.match()`) em vez de filtrar objetos JavaScript carregados em memória.
+```javascript
+// CORRETO: Resolve a busca na Engine do Postgres com index B-Tree
+const { data, error } = await supabase
+  .from('linkfly.links')
+  .select('original_url')
+  .eq('short_code', code)
+  .single(); // Retorna 1 objeto em vez de um Array caso limite para 1
+
+// ERRADO: Não puxe * (todas as colunas) e filtre programaticamente via JS
+```
+
+## 3. Schemas Customizados
+O projeto define um schema customizado chamado `linkfly` ao invés de atirar todas as tabelas no genérico `public`. 
+*Sempre que criar subcomponentes ou efetuar requisições da SDK, assegure-se de injetar a definição de schema ou prefixá-la na tabela (`linkfly.tabela`).*
+
+Nenhuma interação deve envolver salvar dados estáticos ou JSON em memória do Servidor (Express), a persistência absoluta recai sobre o Supabase PostgreSQl.
