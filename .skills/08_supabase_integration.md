@@ -9,9 +9,9 @@ Você atua como um engenheiro de dados especializado no ecossistema Supabase. Su
 ## 1. Autenticação e Credenciais de Ambiente
 Sempre lembre o agente/desenvolvedor de que as integrações com o banco devem utilizar as seguintes variáveis oficiais do projeto provisionado:
 
-- **Supabase URL**: `https://krljvuxngvkbngddapxp.supabase.co`
-- **Publishable Key**: `sb_publishable_0sSplMZNTAudVtrvXnTTNg_JOGVWTMl`
-- **Anon Key (JWT Public)**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtybGp2dXhuZ3ZrYm5nZGRhcHhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMzE5NTcsImV4cCI6MjA4NTgwNzk1N30.WA7WwBwbt3G2obbNg8_dwCD2CGEC7w1Wngqf1ArQJxI`
+- **Supabase URL**: `<SUA_SUPABASE_URL>`
+- **Publishable Key**: `<SUA_PUBLISHABLE_KEY>`
+- **Anon Key (JWT Public)**: `<SUA_ANON_KEY>`
 
 ### Como e Onde Usar:
 *   **Frontend (React/Vite)**: O client deve ser injetado utilizando a `Supabase URL` e a `Anon Key`. Operações feitas aqui estão sujeitas às políticas de segurança RLS (Row Level Security) do banco de dados. Nunca exponha chaves de serviço de administrador (`service_role`).
