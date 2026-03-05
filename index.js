@@ -99,6 +99,11 @@ app.get("/sitemap.xml", (req, res) => {
   res.sendFile(path.join(process.cwd(), "public", "sitemap.xml"));
 });
 
-app.listen(port, () => {
-  console.log(`Servidor rodando na porta ${port}`);
-});
+// Run Express server locally or export it as a Serverless function for Vercel
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Servidor rodando na porta ${port}`);
+  });
+}
+
+export default app;
