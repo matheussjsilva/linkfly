@@ -5,8 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:install": "py -m pip install -r scripts/requirements.txt",
+    "db:sync": "py scripts/verify_schema.py",
+    "ai:orchestrate": "py scripts/orchestrator.py"
   },
   "keywords": [],
   "author": "",

@@ -4,18 +4,22 @@
 -- 1. Criação do Schema
 CREATE SCHEMA IF NOT EXISTS linkfly;
 
+-- Conceder as permissões de uso no novo schema para as chaves da API do Supabase
+GRANT USAGE ON SCHEMA linkfly TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA linkfly TO anon, authenticated, service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA linkfly TO anon, authenticated, service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA linkfly TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA linkfly GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA linkfly GRANT ALL ON ROUTINES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA linkfly GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+
 -- Setar o search_path para usar o novo schema temporariamente ou explicitamente nos objetos.
--- A recomendação em Supabase/PostgREST é manter as tabelas em 'public' para acesso anon/authenticated,
--- MAS, conforme solicitado, vamos criar no schema 'linkfly' e você deve conceder as permissões adequadas
--- no PostgREST se quiser acesso via API diretamente a esse schema.
--- Aqui, por simplicidade, setaremos o search_path
 SET search_path TO linkfly, public;
 
 -- 2. Habilitar extensões necessárias caso não estejam
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- 3. Criação da Tabela 'profiles' (Usuários do sistema vinculados ao auth do Supabase)
--- Se você usa Supabase Auth, o ID geralmente é o mesmo id do auth.users (gen_random_uuid).
 CREATE TABLE IF NOT EXISTS linkfly.profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -44,7 +48,7 @@ CREATE INDEX IF NOT EXISTS idx_links_user_id ON linkfly.links(user_id);
 CREATE TABLE IF NOT EXISTS linkfly.link_clicks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     link_id UUID NOT NULL REFERENCES linkfly.links(id) ON DELETE CASCADE,
-    ip_address INET, -- Guardar IP do clique (cuidado com LGPD, pode pseudo-anonimizar)
+    ip_address INET, -- Guardar IP do clique
     user_agent TEXT, -- Browser e OS do usuário que clicou
     referer TEXT, -- De onde o clique veio
     clicked_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
@@ -82,7 +86,6 @@ CREATE POLICY "Users can update own profile"
     USING (auth.uid() = id);
 
 -- Exemplo RLS: Links - Se for público, todo mundo pode ler (para o redirecionamento funcionar)
--- Mas para *criar*, talvez precise estar logado, ou se for anônimo, lidamos na API (Service Role)
 CREATE POLICY "Anyone can redirect links" 
     ON linkfly.links FOR SELECT 
     USING (is_active = true);
@@ -91,7 +94,7 @@ CREATE POLICY "Users can manage own links"
     ON linkfly.links FOR ALL 
     USING (auth.uid() = user_id);
 
--- Exemplo RLS: Clicks (Geralmente lidado pelo backend/Service Role, mas se for direto:)
+-- Exemplo RLS: Clicks
 CREATE POLICY "Users can view clicks of their links"
     ON linkfly.link_clicks FOR SELECT
     USING (
@@ -101,7 +104,3 @@ CREATE POLICY "Users can view clicks of their links"
               AND l.user_id = auth.uid()
         )
     );
-
--- Nota: Como o sistema foi descrito como tendo a lógica no Backend (Node.js/Express)
--- É vital que o Backend utilize o SUPABASE SERVICE ROLE KEY ou o ANON KEY + Access Token (JWT) do usuário
--- para realizar as operações, garantindo que o RLS seja aplicado ou ignorado dependendo da estratégia (DTO na Edge/Controller).

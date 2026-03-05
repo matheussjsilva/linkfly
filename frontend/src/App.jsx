@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Copy, Link as LinkIcon, AlertCircle } from 'lucide-react';
+import { Copy, Link as LinkIcon, AlertCircle, Zap, ShieldCheck, BarChart3 } from 'lucide-react';
 import './index.css';
 
 function App() {
@@ -125,6 +125,102 @@ function App() {
           <span className="ad-label">Advertisement</span>
           <div className="ad-placeholder">Visite Nossos Patrocinadores</div>
       </div>
+
+      {/* --- SEO & Content Strategy Section --- */}
+      {/* This section provides semantic value and word count for Google AdSense Approval */}
+      <section className="seo-content">
+        <div className="seo-container">
+          
+          <div className="seo-header">
+            <h2>Por que usar o LinkFly para Encurtar seus Links?</h2>
+            <p>
+              O LinkFly não é apenas um encurtador de URLs comum. É uma ferramenta essencial 
+              para profissionais de marketing, criadores de conteúdo e empresas que buscam 
+              otimizar sua presença online. Ao reduzir links longos e complexos para URLs limpas 
+              e amigáveis, você melhora a estética das suas postagens e a experiência do seu usuário final.
+            </p>
+          </div>
+
+          <div className="benefits-grid">
+            <div className="benefit-card">
+              <Zap className="benefit-icon" />
+              <h3>Rapidez e Eficiência</h3>
+              <p>
+                Nosso sistema foi arquitetado para ser ultra-rápido. Você cola sua URL comprida, 
+                e em frações de segundo nosso algoritmo gera uma chave única e encurtada. Compartilhe 
+                instantaneamente no WhatsApp, Instagram, LinkedIn ou Twitter sem ocupar preciosos 
+                caracteres do seu limite de texto.
+              </p>
+            </div>
+            <div className="benefit-card">
+              <ShieldCheck className="benefit-icon" />
+              <h3>Segurança e Confiabilidade</h3>
+              <p>
+                Todos os links gerados pelo LinkFly passam por rigorosos protocolos de 
+                redirecionamento. Nossa infraestrutura garante que, quando o seu cliente clicar, 
+                ele será enviado diretamente ao destino final sem atrasos ou redirecionamentos 
+                suspeitos intermediários.
+              </p>
+            </div>
+            <div className="benefit-card">
+              <BarChart3 className="benefit-icon" />
+              <h3>Mais Cliques (CTR)</h3>
+              <p>
+                Estudos mostram que links esteticamente agradáveis e curtos recebem até 34% mais 
+                cliques do que URLs cheias de parâmetros UTM gigantescos. Use o LinkFly para 
+                esconder a complexidade estrutural e atrair o clique de forma profissional e limpa.
+              </p>
+            </div>
+          </div>
+
+          <div className="faq-section">
+            <h2>Perguntas Frequentes (FAQ) sobre Encurtadores de Link</h2>
+            
+            <div className="faq-item">
+              <h3>O que é um encurtador de link ou URL?</h3>
+              <p>
+                De forma simples, um encurtador de URL é um serviço virtual que permite transformar 
+                um endereço da web muito longo (aqueles cheios de letras, números e símbolos) em um 
+                link consideravelmente menor. Este link curto redireciona de forma imperceptível 
+                para a página original.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>Os links curtos gerados no LinkFly expiram?</h3>
+              <p>
+                Não! Um dos grandes diferenciais do nosso serviço base é que os links encurtados aqui 
+                são permanentes. Uma vez gerados, eles não possuem uma data de validade imposta pelo 
+                sistema. Você pode espalhá-los pela internet com a garantia de que o seu tráfego será 
+                preservado, salvo se houver violação dos nossos termos de uso (spam, phishing).
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h3>É seguro clicar em links curtos?</h3>
+              <p>
+                A filosofia do LinkFly é a transparência. Nosso sistema é projetado para encaminhar 
+                tráfego orgânico seguro sem rastreamento invasivo do consumidor. Para o usuário final, 
+                é o mesmo que clicar na URL direta. Como prática recomendada e padrão de higiene cibernética,
+                você não deve encurtar links para malwares, e nós nos reservamos ao direito de banir 
+                URLs maliciosas que comprometam a rede.
+              </p>
+            </div>
+            
+            <div className="faq-item">
+              <h3>Posso encurtar links pro WhatsApp ou Instagram?</h3>
+              <p>
+                Sim! Essa é uma das principais razões para usar nossa ferramenta web gratuita. 
+                As biografias de redes sociais geralmente têm um limite fixo para o perfil. 
+                Pegar uma URL de vídeo pesado do YouTube, um convite de grupo fechado ou um 
+                catálogo de vendas, passá-lo aqui e colocar o resultado lá, garante que 
+                ele não fique quebrado e a conversão de seus clientes se mantenha alta!
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       <footer>
         <p>© {new Date().getFullYear()} LinkFly. Todos os direitos reservados.</p>

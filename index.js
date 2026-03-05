@@ -24,7 +24,9 @@ if (!supabaseUrl || !supabaseKey) {
   process.exit(1);
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  db: { schema: 'linkfly' }
+});
 
 app.post("/shorten", async (req, res) => {
   const { url, domain } = req.body;
@@ -45,19 +47,15 @@ app.post("/shorten", async (req, res) => {
   const shortUrl = `${baseUrl}/${shortCode}`;
 
   try {
-    // Persist into Supabase PostgreSQL
+    // Persist into Supabase PostgreSQL (custom schema 'linkfly' explicitly set in createClient)
     const { error } = await supabase
-      .from('linkfly.links') // Depending on search_path, you may need schema prefix or just 'links'
+      .from('links')
       .insert([
-        { original_url: url, short_code: shortCode } // user_id is null since it's anonymous for now
+        { original_url: url, short_code: shortCode }
       ]);
 
     if (error) {
-      // In case the connection rules require the table without schema prefix since schema belongs to search_path
-      const retryFallback = await supabase.from('links').insert([{ original_url: url, short_code: shortCode }]);
-      if (retryFallback.error) {
-        throw new Error(retryFallback.error.message);
-      }
+        throw new Error(error.message);
     }
 
     res.json({ shortenedUrl: shortUrl });

@@ -20,10 +20,14 @@ Sempre lembre o agente/desenvolvedor de que as integrações com o banco devem u
 ## 2. Padrões de Query (Querying Patterns)
 Ao construir chamadas para o banco:
 
+> [!IMPORTANT]
+> **REGRA DE OURO DO SCHEMA:** O banco de dados NÃO utiliza o schema `public` padrão. O schema oficial do projeto é o **`linkfly`**. Absolutamente *TODA* requisição no banco de dados, via SDK ou REST, **precisa** declarar e utilizar o schema `linkfly`. Jamais busque tabelas no `public`.
+> Exemplo no construtor da SDK: `const supabase = createClient(url, key, { db: { schema: 'linkfly' } });`
+
 ### Inserções seguras (Insertions):
 ```javascript
 const { data, error } = await supabase
-  .from('linkfly.links') // Declare sempre o schema antes da tabela se não for 'public'
+  .from('links') // Quando usamos schema explícito no client, o from() só precisa do nome da tabela
   .insert([{ original_url: url, short_code: code }])
   .select(); // Obrigatório se precisar testar o retorno e visualizar colunas criadas
 ```
@@ -33,7 +37,7 @@ O SDK do Supabase aceita chained filters. Sempre utilize os identificadores corr
 ```javascript
 // CORRETO: Resolve a busca na Engine do Postgres com index B-Tree
 const { data, error } = await supabase
-  .from('linkfly.links')
+  .from('links')
   .select('original_url')
   .eq('short_code', code)
   .single(); // Retorna 1 objeto em vez de um Array caso limite para 1
@@ -43,6 +47,6 @@ const { data, error } = await supabase
 
 ## 3. Schemas Customizados
 O projeto define um schema customizado chamado `linkfly` ao invés de atirar todas as tabelas no genérico `public`. 
-*Sempre que criar subcomponentes ou efetuar requisições da SDK, assegure-se de injetar a definição de schema ou prefixá-la na tabela (`linkfly.tabela`).*
+*Sempre que criar subcomponentes ou efetuar requisições da SDK, assegure-se de injetar a configuração `{ db: { schema: 'linkfly' } }` no cliente Supabase.*
 
 Nenhuma interação deve envolver salvar dados estáticos ou JSON em memória do Servidor (Express), a persistência absoluta recai sobre o Supabase PostgreSQl.
